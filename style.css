@@ -1,0 +1,284 @@
+/* Global reset-ish */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #ffffff;
+  background: radial-gradient(circle at top, #161733, #050510);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+/* Background glow */
+.bg-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.2), transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.25), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* HUD */
+#hud {
+  position: fixed;
+  top: 12px;
+  right: 14px;
+  padding: 10px 14px;
+  background: rgba(5, 5, 20, 0.8);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  font-size: 13px;
+  z-index: 10;
+}
+
+.hud-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.hud-row:last-child {
+  margin-bottom: 0;
+}
+
+.hud-label {
+  opacity: 0.7;
+}
+
+/* Center title */
+.center-title {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 1;
+}
+
+.center-title h1 {
+  font-size: 42px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(0, 200, 255, 0.7);
+}
+
+.subtitle {
+  margin-top: 8px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* Dock */
+.dock {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  padding: 12px 18px;
+  background: rgba(5, 5, 20, 0.9);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(20px);
+  z-index: 10;
+}
+
+.dock-icon {
+  border: none;
+  background: linear-gradient(135deg, #2d3a72, #6b2da8);
+  border-radius: 16px;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s;
+  box-shadow: 0 0 10px rgba(0, 150, 255, 0.2);
+  font-size: 13px;
+}
+
+.dock-icon:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 0 18px rgba(0, 200, 255, 0.6);
+  background: linear-gradient(135deg, #3750b5, #9c36ff);
+}
+
+.dock-emoji {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.dock-label {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+/* Windows */
+.window {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(80%, 740px);
+  height: 56%;
+  background: rgba(10, 10, 30, 0.92);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+  display: none; /* hidden by default */
+  z-index: 5;
+  overflow: hidden;
+}
+
+.window-header {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(90deg, rgba(32, 41, 83, 0.9), rgba(67, 33, 100, 0.9));
+  font-size: 14px;
+}
+
+.window-body {
+  padding: 14px;
+  font-size: 14px;
+  overflow-y: auto;
+}
+
+.window-close {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.window-close:hover {
+  opacity: 1;
+}
+
+.window.active {
+  display: block;
+}
+
+/* App cards */
+.app-card {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.iframe-shell {
+  margin-top: 8px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.iframe-shell iframe {
+  width: 100%;
+  height: 220px;
+  border: none;
+}
+
+/* Settings */
+.settings-group {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.settings-btn {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  background: rgba(40, 40, 80, 0.9);
+  color: #ffffff;
+  padding: 6px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.settings-btn:hover {
+  background: rgba(70, 70, 130, 0.95);
+  transform: translateY(-1px);
+}
+
+/* Lists */
+.list {
+  margin-left: 18px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.list li {
+  margin-bottom: 4px;
+}
+
+/* Plus perks */
+.plus-perks {
+  margin-top: 16px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Plus visual state */
+.body-plus-active {
+  /* global vibe change when Directional+ is active */
+  background: radial-gradient(circle at top, #1d0030, #04000f);
+}
+
+.body-plus-active .center-title h1 {
+  text-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
+}
+
+.body-plus-active .dock {
+  border-color: rgba(255, 0, 255, 0.6);
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.6);
+}
+
+.body-plus-active .dock-icon {
+  box-shadow: 0 0 18px rgba(255, 0, 255, 0.7);
+}
+
+/* Plus-only content */
+.plus-only {
+  opacity: 0.4;
+}
+
+/* When plus is active, make plus-only areas fully visible */
+.plus-enabled .plus-only {
+  opacity: 1;
+}
+
+/* Themes via data attribute on body */
+body[data-theme="midnight"] {
+  background: radial-gradient(circle at top, #050816, #000000);
+}
+
+body[data-theme="neon"] {
+  background: radial-gradient(circle at top, #13001f, #000000);
+}
