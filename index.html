@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Norther OS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background overlay for vibe -->
+  <div class="bg-glow"></div>
+
+  <!-- Top HUD: points + Directional+ status -->
+  <div id="hud">
+    <div class="hud-row">
+      <span class="hud-label">Points:</span>
+      <span id="pointsDisplay">0</span>
+    </div>
+    <div class="hud-row">
+      <span class="hud-label">Status:</span>
+      <span id="plusStatus">Free Tier</span>
+    </div>
+  </div>
+
+  <!-- Center logo / title -->
+  <div class="center-title">
+    <h1>Norther OS</h1>
+    <p class="subtitle">Browser-based OS shell</p>
+  </div>
+
+  <!-- Dock -->
+  <div class="dock">
+    <button class="dock-icon" onclick="openWindow('appsWindow')">
+      <span class="dock-emoji">🕹️</span>
+      <span class="dock-label">Apps</span>
+    </button>
+    <button class="dock-icon" onclick="openWindow('settingsWindow')">
+      <span class="dock-emoji">⚙️</span>
+      <span class="dock-label">Settings</span>
+    </button>
+    <button class="dock-icon" onclick="openWindow('plusWindow')">
+      <span class="dock-emoji">⭐</span>
+      <span class="dock-label">Directional+</span>
+    </button>
+  </div>
+
+  <!-- Windows -->
+
+  <!-- Apps window -->
+  <div id="appsWindow" class="window">
+    <div class="window-header">
+      <span>Apps</span>
+      <button class="window-close" onclick="closeWindow('appsWindow')">✕</button>
+    </div>
+    <div class="window-body">
+      <h2>App Launcher</h2>
+      <p>Here you can embed cloud apps, games, or VM frontends using iframes.</p>
+
+      <!-- Example fake “cloud app” iframe -->
+      <div class="app-card">
+        <h3>Demo Cloud App</h3>
+        <p>This iframe simulates where a cloud VM or web app would load.</p>
+        <div class="iframe-shell">
+          <iframe
+            src="https://example.com"
+            title="Demo Cloud App"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings window -->
+  <div id="settingsWindow" class="window">
+    <div class="window-header">
+      <span>Settings</span>
+      <button class="window-close" onclick="closeWindow('settingsWindow')">✕</button>
+    </div>
+    <div class="window-body">
+      <h2>Appearance</h2>
+      <p>Basic theme toggles. Directional+ can unlock more later.</p>
+
+      <div class="settings-group">
+        <button onclick="setTheme('default')" class="settings-btn">
+          Default Theme
+        </button>
+        <button onclick="setTheme('midnight')" class="settings-btn">
+          Midnight Theme
+        </button>
+      </div>
+
+      <div class="settings-group plus-only">
+        <h3>Directional+ Themes</h3>
+        <p>Unlocked themes for Directional+ users.</p>
+        <button onclick="setTheme('neon')" class="settings-btn">
+          Neon Flux
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Directional+ window -->
+  <div id="plusWindow" class="window">
+    <div class="window-header">
+      <span>Directional+</span>
+      <button class="window-close" onclick="closeWindow('plusWindow')">✕</button>
+    </div>
+    <div class="window-body">
+      <h2>Directional+</h2>
+      <p>
+        Directional+ is a premium-style tier powered by in-OS points.
+        No real money. No purchases. Just use Norther OS and earn.
+      </p>
+
+      <h3>How to earn points</h3>
+      <ul class="list">
+        <li>Open Norther OS (daily login)</li>
+        <li>Open apps</li>
+        <li>Customize settings</li>
+      </ul>
+
+      <!-- Dev/testing buttons – you can hide these later -->
+      <div class="settings-group">
+        <button onclick="devEarnPoints(50)" class="settings-btn">
+          +50 points (test)
+        </button>
+        <button onclick="devEarnPoints(200)" class="settings-btn">
+          +200 points (test)
+        </button>
+      </div>
+
+      <h3>Unlock Directional+</h3>
+      <p id="plusRequirementText"></p>
+      <button id="unlockPlusBtn" onclick="attemptUnlockPlus()" class="settings-btn">
+        Unlock Directional+
+      </button>
+
+      <div class="plus-perks">
+        <h3>Perks</h3>
+        <ul class="list">
+          <li>Special neon visuals and glow</li>
+          <li>Premium theme options</li>
+          <li>Directional+ status badge</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
